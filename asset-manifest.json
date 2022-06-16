@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/currency-converter/static/css/main.8f6ea2ef.css",
+    "main.js": "/currency-converter/static/js/main.55d5db26.js",
+    "static/media/Metropolis-Regular.ttf": "/currency-converter/static/media/Metropolis-Regular.464807ef062a5a4028c0.ttf",
+    "static/media/Metropolis-SemiBold.ttf": "/currency-converter/static/media/Metropolis-SemiBold.125b2a3530fbe25af454.ttf",
+    "static/media/Metropolis-SemiBold.woff": "/currency-converter/static/media/Metropolis-SemiBold.8d29fd95075a91fe6e90.woff",
+    "static/media/Metropolis-Regular.woff": "/currency-converter/static/media/Metropolis-Regular.1c132ebad5066558a233.woff",
+    "static/media/bg.jpg": "/currency-converter/static/media/bg.ea94405cfed3d8b850aa.jpg",
+    "static/media/Metropolis-SemiBold.woff2": "/currency-converter/static/media/Metropolis-SemiBold.c2d3f77afdc603dce79b.woff2",
+    "static/media/Metropolis-Regular.woff2": "/currency-converter/static/media/Metropolis-Regular.5099e18839ad3aa552bf.woff2",
+    "index.html": "/currency-converter/index.html",
+    "main.8f6ea2ef.css.map": "/currency-converter/static/css/main.8f6ea2ef.css.map",
+    "main.55d5db26.js.map": "/currency-converter/static/js/main.55d5db26.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8f6ea2ef.css",
+    "static/js/main.55d5db26.js"
+  ]
+}
