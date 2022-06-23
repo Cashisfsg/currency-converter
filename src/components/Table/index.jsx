@@ -1,16 +1,14 @@
-import React, { useContext } from "react";
-import Context from "../../containers/context/context";
-import { Flex, Text } from "../ui";
+import React from "react";
+import { Flex } from "../ui/flexcontainer";
+import { Text } from "../ui/text";
 import { Wrapper, Item } from "./styled";
 
-function Table(props) {
-
-    const {currency} = useContext(Context)
-
+function Table({data, ...props}) {
+    
     return (
         <Flex {...props}>
             <Wrapper>
-                {currency.map((cur => (
+                {data.map((cur => (
                     <Flex key={cur.ccy} justify="space-around">
                         <Item>
                             <Text>
@@ -24,18 +22,18 @@ function Table(props) {
                         </Item>
                         <Item>
                             <Text>
-                                {cur.buy}
+                                {(+cur.buy).toFixed(2)}
                             </Text>
                         </Item>
                         <Item>
                             <Text>
-                                {cur.sale}
+                                {(+cur.sale).toFixed(2)}
                             </Text>
                         </Item>
                     </Flex>
                 )))}
             </Wrapper>
-            <Text style={{alignSelf: "flex-end"}}>{`Актуальна інформація на ${new Date().toLocaleString().replace(/T.+/g, "")}`}</Text>               
+                           
         </Flex>
     )
 }

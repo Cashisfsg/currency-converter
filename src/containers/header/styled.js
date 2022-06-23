@@ -9,6 +9,5 @@ export const Logo = styled.div`
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    border-bottom: 2px solid #FFF
-
+    border-bottom: 2px solid #FFF;
 `;
