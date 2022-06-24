@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Flex } from "../../components/ui/flexcontainer";
 import Button from "../../components/ui/button";
 import CoinContainer from "../../components/CoinContainer";
+import useInput from "../../hooks/useInput";
 
 
 function Converter({currencysList, ...props}) {
@@ -10,6 +11,33 @@ function Converter({currencysList, ...props}) {
     const [secondCurrency, setSecondCurrency] = useState({name: currencysList[0].txt, amount: 1, rate: +currencysList[0].rate})
 
     const [isReverse, setIsReverse] = useState(false);
+
+    const firstInput = useInput("", {maxLength: 12, isDigit: false});
+    const secondInput = useInput("", {maxLength: 12, isDigit: false});
+
+    const RefreshInput = (e, [firstCur, secondCur], [setFirstCur, setSecondCur]) => {
+        console.log(e);
+        setFirstCur(firstCur => ({
+            ...firstCur,
+            amount: +e
+        }))
+        setSecondCur(secondCur => ({
+            ...secondCur,
+            amount: +e / +firstCur.rate * +secondCur.rate
+        })) 
+    }
+
+    useEffect(() => {
+        RefreshInput(firstInput.value, 
+            [firstCurrency, secondCurrency], 
+            [setFirstCurrency, setSecondCurrency])
+    }, [firstInput.value])
+    
+    useEffect(() => {
+        RefreshInput(secondInput.value, 
+            [secondCurrency, firstCurrency], 
+            [setSecondCurrency, setFirstCurrency])
+    }, [secondInput.value])
 
     const RefreshName = (e, [firstCur, secondCur], setFirstCur) => {
         setFirstCur({...firstCur,
@@ -23,28 +51,17 @@ function Converter({currencysList, ...props}) {
         }))
     }
 
-    const RefreshInput = (e, [firstCur, secondCur], [setFirstCur, setSecondCur]) => {
-        setFirstCur(firstCur => ({
-            ...firstCur,
-            amount: +e.target.value
-        }))
-        setSecondCur(secondCur => ({
-            ...secondCur,
-            amount: +e.target.value / +firstCur.rate * +secondCur.rate
-        }))
-       
-    }
+
     
     return (
-        <Flex {...props} direction={isReverse ? "row" : "row-reverse"} >
+        <Flex {...props} direction={!isReverse ? "row" : "row-reverse"} >
                     
             <CoinContainer
                 currentCurrency={firstCurrency}
                 currencysList={currencysList} 
                 onChangeSelect={(e) => RefreshName(e, [firstCurrency, secondCurrency] , setFirstCurrency)}
-                onChangeInput={(e) => RefreshInput(e, 
-                    [firstCurrency, secondCurrency], 
-                    [setFirstCurrency, setSecondCurrency])}
+                input={firstInput}
+                placeholder="first currency"
             />
 
             <Flex direction="column" gap="25px">
@@ -60,9 +77,8 @@ function Converter({currencysList, ...props}) {
                 currentCurrency={secondCurrency} 
                 currencysList={currencysList}
                 onChangeSelect={(e) => RefreshName(e, [secondCurrency, firstCurrency], setSecondCurrency)}
-                onChangeInput={(e) => RefreshInput(e, 
-                    [secondCurrency, firstCurrency], 
-                    [setSecondCurrency, setFirstCurrency])}
+                input={secondInput}
+                placeholder="second currency"
             />
 
         </Flex>

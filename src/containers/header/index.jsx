@@ -11,7 +11,7 @@ import { Logo } from "./styled";
 function Header(props) {
 
     const [{data, isLoading, isError, error}, setUrl] = useFetch("https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5");
-
+    
     return (
         <Flex {...props}>
             <Logo />

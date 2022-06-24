@@ -9,6 +9,7 @@ const Wrapper = styled.div`
     width: 75%;
     height: max-content;
     min-height: 100vh;
+    min-width: 800px;
     margin: 0 auto;
     position: ${({ position }) => (position || null)};
     background: rgb(79, 109, 122);
