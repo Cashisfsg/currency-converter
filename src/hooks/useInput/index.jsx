@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { setSelectionRange } from "@testing-library/user-event/dist/utils";
+import { useCallback } from "react";
+import { useState } from "react";
 import useValidation from "../useValidation";
 
 function useInput(initialValue, validations) {
@@ -7,9 +9,10 @@ function useInput(initialValue, validations) {
 
     const {validValue, isDigitError, maxLengthError, errorsListMessage} = useValidation(value, validations);
 
-    const onChange = (e) => {
+    const onChange = useCallback((e, setPosition) => {
         setValue(() => e.target.value);
-    }
+        setPosition(e.target.selectionStart);
+    })
 
     return {
         value: validValue,

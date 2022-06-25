@@ -16,14 +16,13 @@ function Converter({currencysList, ...props}) {
     const secondInput = useInput("", {maxLength: 12, isDigit: false});
 
     const RefreshInput = (e, [firstCur, secondCur], [setFirstCur, setSecondCur]) => {
-        console.log(e);
         setFirstCur(firstCur => ({
             ...firstCur,
-            amount: +e
+            amount: e
         }))
         setSecondCur(secondCur => ({
             ...secondCur,
-            amount: +e / +firstCur.rate * +secondCur.rate
+            amount: Math.round(e / firstCur.rate * secondCur.rate * 100) / 100
         })) 
     }
 
@@ -47,11 +46,9 @@ function Converter({currencysList, ...props}) {
             rate: +currencysList.find(el => el.txt == firstCur.name).rate
         }))
         setFirstCur(firstCur => ({...firstCur,
-            amount: +secondCur.amount / +secondCur.rate * +firstCur.rate
+            amount: (+secondCur.amount / +secondCur.rate * +firstCur.rate).toFixed(2)
         }))
     }
-
-
     
     return (
         <Flex {...props} direction={!isReverse ? "row" : "row-reverse"} >

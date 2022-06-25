@@ -2,7 +2,6 @@ import React from "react";
 import { Flex } from "../ui/flexcontainer";
 import Input from "../ui/input";
 import Select from "../ui/select";
-import useInput from "../../hooks/useInput"
 
 function CoinContainer({currentCurrency, currencysList, onChangeSelect, input, placeholder}) {
 
@@ -15,8 +14,8 @@ function CoinContainer({currentCurrency, currencysList, onChangeSelect, input, p
             radius="14px">
 
             <Input
-                value={currentCurrency.amount.toFixed(2)}
-                onChange={(e) => input.onChange(e) } 
+                value={currentCurrency.amount}
+                onChange={(e, setPosition) => input.onChange(e, setPosition) } 
                 placeholder={placeholder}
                 isError={input.isDigitError || input.maxLengthError}
                 errorMessages={input.errorsListMessage}/>

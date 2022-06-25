@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 function useValidation (value, validations) {
     
@@ -13,22 +13,19 @@ function useValidation (value, validations) {
             switch (validation) {
                 case "isDigit":
                     if (isNaN(Number(value))) {
-                        console.log("IsDigitError")
                         setIsDigitError(true);
                         setErrorsListMessage({
                             ...errorsListMessage,
                             [validation]: "Только цифры"
                         });
-                        setValidValue(() => value.slice(0, validations[validation] - 3).replace(/\D/g, ""));
-                        console.log("Valid value: ", validValue)
+                        setValidValue(() => validValue.replace(/[^\d\.]+|(?<=\d\.\d{2})[\d\w\s\.]+/g, ""));
                     } else {
                         setIsDigitError(false);
                     }
                     break;
                 case "maxLength":
                     if (value.length > validations[validation]) {
-                        setValidValue(() => value.slice(0, validations[validation] - 3));
-                        console.log("Length error", validValue, typeof(value))
+                        setValidValue(() => value.substring(0, validations[validation]));
                         setMaxLengthError(true);
                         setErrorsListMessage({
                             ...errorsListMessage,
@@ -36,8 +33,7 @@ function useValidation (value, validations) {
                         });
                     } else {
                         setMaxLengthError(false);
-
-                        setValidValue(() => value);
+                        setValidValue(() => value.replace(/(?<=\d\.[\d]{2})[\d\s]+/g, "").trim());
                     }
                     break;
             }
